@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo | Pastelería Mishky</title>
+    <meta name="description" content="Tortas, postres peruanos, panes y galletas artesanales de Pastelería Mishky." />
+    <link rel="icon" href="img/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/estilos.css" />
+</head>
+
+<body>
+    <header class="cabecera">
+        <div class="contenedor cabecera_fila">
+            <a href="index.html" class="marca">
+                <img src="img/logo.png" alt="Pastelería Mishky" width="176" height="52" />
+            </a>
+            <nav aria-label="Principal">
+                <ul class="menu">
+                    <li><a href="#catalogo" aria-current="page">Catálogo</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="contenedor hero_texto">
+            <p class="hero_antetitulo">Hecho a mano en Cusco desde 2012</p>
+            <h1>Dulces que se recuerdan</h1>
+            <p>Tortas, postres peruanos, panes y galletas horneados cada mañana.</p>
+        </div>
+    </section>
+
+    <main id="catalogo" class="contenedor">
+        <h2 class="titulo-seccion">Nuestro catálogo</h2>
+        <!-- Los botones de categoría se generan dinámicamente -->
+        <div id="filtros" class="filtros" role="group" aria-label="Filtrar por categoría"></div>
+        <p id="estado" class="estado" role="status" aria-live="polite"></p>
+        <!-- Contenedor vacío donde se renderizan las tarjetas -->
+        <ul id="grilla" class="grilla" aria-busy="true"></ul>
+    </main>
+
+    <footer id="contacto" class="pie">
+        <div class="contenedor">
+            <strong>Pastelería Mishky</strong> — Av. El Sol 845, Cusco — Pedidos: 984 000 111
+            <p>&copy; 2026 — Proyecto académico — Desarrollo Web I</p>
+        </div>
+    </footer>
+
+    <!-- Molde HTML de la tarjeta -->
+    <template id="tpl-producto">
+    <li class="tarjeta">
+      <figure class="tarjeta_foto">
+        <img width="600" height="600" loading="lazy" alt="" />
+        <span class="etiqueta" hidden></span>
+      </figure>
+      <div class="tarjeta_cuerpo">
+        <p class="tarjeta_categoria"></p>
+        <h3 class="tarjeta_nombre"></h3>
+        <p class="tarjeta_descripcion"></p>
+        <div class="tarjeta_pie">
+          <span class="tarjeta_precio"></span>
+          <span class="tarjeta_porciones"></span>
+        </div>
+      </div>
+    </li>
+  </template>
+
+    <script src="js/catalogo.js" defer></script>
+</body>
+
+</html>
