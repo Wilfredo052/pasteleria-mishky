@@ -25,6 +25,10 @@
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
+            <!-- RETO 4: Botón para abrir el carrito de pedidos -->
+            <button id="btn-carrito" class="btn-carrito" type="button" aria-label="Ver pedido actual">
+                🛒 Pedido (<span id="contador-carrito">0</span>)
+            </button>
         </div>
     </header>
 
@@ -38,10 +42,23 @@
 
     <main id="catalogo" class="contenedor">
         <h2 class="titulo-seccion">Nuestro catálogo</h2>
-        <!-- Los botones de categoría se generan dinámicamente -->
-        <div id="filtros" class="filtros" role="group" aria-label="Filtrar por categoría"></div>
+
+        <!-- Barra de filtros + RETO 3: Selector de ordenamiento -->
+        <div class="controles-catalogo">
+            <div id="filtros" class="filtros" role="group" aria-label="Filtrar por categoría"></div>
+
+            <div class="ordenar-caja">
+                <label for="ordenar" class="ordenar-etiqueta">Ordenar por:</label>
+                <select id="ordenar" class="ordenar-select">
+                    <option value="recomendado">Recomendados</option>
+                    <option value="precio-asc">Precio: menor a mayor</option>
+                    <option value="precio-desc">Precio: mayor a menor</option>
+                    <option value="nombre-asc">Nombre: A - Z</option>
+                </select>
+            </div>
+        </div>
+
         <p id="estado" class="estado" role="status" aria-live="polite"></p>
-        <!-- Contenedor vacío donde se renderizan las tarjetas -->
         <ul id="grilla" class="grilla" aria-busy="true"></ul>
     </main>
 
@@ -54,22 +71,52 @@
 
     <!-- Molde HTML de la tarjeta -->
     <template id="tpl-producto">
-    <li class="tarjeta">
-      <figure class="tarjeta_foto">
-        <img width="600" height="600" loading="lazy" alt="" />
-        <span class="etiqueta" hidden></span>
-      </figure>
-      <div class="tarjeta_cuerpo">
-        <p class="tarjeta_categoria"></p>
-        <h3 class="tarjeta_nombre"></h3>
-        <p class="tarjeta_descripcion"></p>
-        <div class="tarjeta_pie">
-          <span class="tarjeta_precio"></span>
-          <span class="tarjeta_porciones"></span>
+        <li class="tarjeta">
+            <figure class="tarjeta_foto">
+                <img width="600" height="600" loading="lazy" alt="" />
+                <span class="etiqueta" hidden></span>
+            </figure>
+            <div class="tarjeta_cuerpo">
+                <p class="tarjeta_categoria"></p>
+                <h3 class="tarjeta_nombre"></h3>
+                <p class="tarjeta_descripcion"></p>
+                <div class="tarjeta_pie">
+                    <span class="tarjeta_precio"></span>
+                    <span class="tarjeta_porciones"></span>
+                </div>
+                <!-- RETO 4: Botón para añadir el producto -->
+                <button type="button" class="btn-agregar">Agregar al pedido</button>
+            </div>
+        </li>
+    </template>
+
+    <!-- RETO 4: Ventana modal del carrito de pedidos -->
+    <dialog id="modal-carrito" class="modal-carrito" aria-labelledby="titulo-carrito">
+        <div class="carrito-contenido">
+            <div class="carrito-cabecera">
+                <div>
+                    <h3 id="titulo-carrito">Tu pedido en Mishky</h3>
+                    <span class="carrito-telefono">📞 Pedidos al: 984 000 111</span>
+                </div>
+                <button id="btn-cerrar-carrito" class="btn-cerrar" type="button" aria-label="Cerrar ventana">&times;</button>
+            </div>
+
+            <ul id="lista-carrito" class="lista-carrito"></ul>
+            <p id="carrito-vacio" class="carrito-vacio">Aún no has agregado postres a tu pedido.</p>
+            <p id="mensaje-confirmacion" class="mensaje-confirmacion" role="status" hidden></p>
+
+            <div class="carrito-resumen">
+                <div class="carrito-total-fila">
+                    <span>Total estimado:</span>
+                    <strong id="total-carrito">S/ 0.00</strong>
+                </div>
+                <div class="carrito-acciones">
+                    <button id="btn-vaciar" type="button" class="btn-vaciar">Vaciar</button>
+                    <button id="btn-confirmar" type="button" class="btn-confirmar">Enviar pedido</button>
+                </div>
+            </div>
         </div>
-      </div>
-    </li>
-  </template>
+    </dialog>
 
     <script src="js/catalogo.js" defer></script>
 </body>
