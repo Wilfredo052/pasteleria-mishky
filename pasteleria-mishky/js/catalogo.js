@@ -7,10 +7,13 @@ const contFiltros = document.querySelector("#filtros");
 const grilla = document.querySelector("#grilla");
 const estado = document.querySelector("#estado");
 const plantilla = document.querySelector("#tpl-producto");
+const inputBuscador = document.querySelector("#buscador");
+const btnTema = document.querySelector("#btn-tema");
 
 // Estado de la aplicación
 let productos = [];
 let categoriaActiva = TODAS;
+let textoBusqueda = "";
 
 // Formato de moneda peruana (S/ 89.90)
 const soles = new Intl.NumberFormat("es-PE", { style: "currency", currency: "PEN" });
@@ -81,13 +84,24 @@ function crearTarjeta(p) {
     return nodo;
 }
 
-// 4. Renderizar la lista filtrada
+// 4. Renderizar la lista filtrada por categoría y búsqueda
 function renderizarCatalogo() {
-    const lista = categoriaActiva === TODAS ? productos : productos.filter((p) => p.categoria === categoriaActiva);
+    const termino = textoBusqueda.trim().toLowerCase();
+
+    const lista = productos.filter((p) => {
+        const coincideCategoria = categoriaActiva === TODAS || p.categoria === categoriaActiva;
+        const coincideTexto =
+            p.nombre.toLowerCase().includes(termino) ||
+            p.descripcion.toLowerCase().includes(termino);
+
+        return coincideCategoria && coincideTexto;
+    });
 
     if (lista.length === 0) {
         grilla.replaceChildren();
-        estado.textContent = "No hay productos en esta categoría.";
+        estado.textContent = termino ?
+            `No se encontraron productos que coincidan con «${textoBusqueda.trim()}».` :
+            "No hay productos en esta categoría.";
         return;
     }
 
@@ -111,7 +125,19 @@ contFiltros.addEventListener("click", (evento) => {
     renderizarCatalogo();
 });
 
-// 6. Inicio de la aplicación
+// 6. Eventos de los nuevos retos (buscador y tema oscuro)
+inputBuscador.addEventListener("input", (evento) => {
+    textoBusqueda = evento.target.value;
+    renderizarCatalogo();
+});
+
+btnTema.addEventListener("click", () => {
+    const oscuroActivo = document.body.classList.toggle("tema-oscuro");
+    btnTema.setAttribute("aria-pressed", String(oscuroActivo));
+    btnTema.textContent = oscuroActivo ? "☀️ Modo claro" : "🌙 Modo oscuro";
+});
+
+// 7. Inicio de la aplicación
 async function iniciar() {
     estado.textContent = "Cargando productos...";
     try {
