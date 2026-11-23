@@ -25,6 +25,10 @@
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
+            <!-- NUEVO RETO 2: Botón de Tema Oscuro -->
+            <button id="btn-tema" class="btn-tema" type="button" aria-pressed="false">
+                🌙 Modo oscuro
+            </button>
         </div>
     </header>
 
@@ -38,6 +42,12 @@
 
     <main id="catalogo" class="contenedor">
         <h2 class="titulo-seccion">Nuestro catálogo</h2>
+
+        <!-- NUEVO RETO 1: Buscador en tiempo real -->
+        <div class="buscador-caja">
+            <input type="search" id="buscador" class="buscador-input" placeholder="Buscar postre por nombre o ingrediente (ej. chocolate, lúcuma)..." aria-label="Buscar producto" />
+        </div>
+
         <!-- Los botones de categoría se generan dinámicamente -->
         <div id="filtros" class="filtros" role="group" aria-label="Filtrar por categoría"></div>
         <p id="estado" class="estado" role="status" aria-live="polite"></p>
@@ -54,22 +64,22 @@
 
     <!-- Molde HTML de la tarjeta -->
     <template id="tpl-producto">
-    <li class="tarjeta">
-      <figure class="tarjeta_foto">
-        <img width="600" height="600" loading="lazy" alt="" />
-        <span class="etiqueta" hidden></span>
-      </figure>
-      <div class="tarjeta_cuerpo">
-        <p class="tarjeta_categoria"></p>
-        <h3 class="tarjeta_nombre"></h3>
-        <p class="tarjeta_descripcion"></p>
-        <div class="tarjeta_pie">
-          <span class="tarjeta_precio"></span>
-          <span class="tarjeta_porciones"></span>
-        </div>
-      </div>
-    </li>
-  </template>
+        <li class="tarjeta">
+            <figure class="tarjeta_foto">
+                <img width="600" height="600" loading="lazy" alt="" />
+                <span class="etiqueta" hidden></span>
+            </figure>
+            <div class="tarjeta_cuerpo">
+                <p class="tarjeta_categoria"></p>
+                <h3 class="tarjeta_nombre"></h3>
+                <p class="tarjeta_descripcion"></p>
+                <div class="tarjeta_pie">
+                    <span class="tarjeta_precio"></span>
+                    <span class="tarjeta_porciones"></span>
+                </div>
+            </div>
+        </li>
+    </template>
 
     <script src="js/catalogo.js" defer></script>
 </body>
